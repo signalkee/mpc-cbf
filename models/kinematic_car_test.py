@@ -1,5 +1,13 @@
-import math
+import sys
+sys.path.append('C:/Users/inho/OneDrive - Umich/Kee/2_UMich_MS/2024_Winter/AERO740 MPC/Final project/mpc-cbf')
 
+import os
+if not os.path.exists('figures'):
+    os.makedirs('figures')
+if not os.path.exists('animations'):
+    os.makedirs('animations')
+
+import math
 import matplotlib.patches as patches
 import matplotlib.pyplot as plt
 from matplotlib import animation
