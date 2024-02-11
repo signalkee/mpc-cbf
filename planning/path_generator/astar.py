@@ -167,12 +167,24 @@ class GraphSearch:
                 return False
         return True
 
+    # def check_collision(self, pos):
+    #     for o in self.obstacles:
+    #         A, b = o.get_convex_rep()
+    #         b = b.reshape((len(b),))
+    #         if all(A @ pos - b - self.margin * np.linalg.norm(A, axis=1) <= 0):
+    #             return True
+    #     return False
+
     def check_collision(self, pos):
         for o in self.obstacles:
-            A, b = o.get_convex_rep()
-            b = b.reshape((len(b),))
-            if all(A @ pos - b - self.margin * np.linalg.norm(A, axis=1) <= 0):
-                return True
+            if isinstance(o, CircleRegion):
+                if o.check_collision_with_point(pos, self.margin):
+                    return True
+            else:
+                A, b = o.get_convex_rep()
+                b = b.reshape((len(b),))
+                if all(A @ pos - b - self.margin * np.linalg.norm(A, axis=1) <= 0):
+                    return True
         return False
 
     def reconstruct_path(self, node):

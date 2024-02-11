@@ -64,6 +64,36 @@ class PolytopeRegion(ConvexRegion2D):
         return patches.Polygon(self.points, closed=True, linewidth=1, edgecolor="k", facecolor="r")
 
 
+class CircleRegion(ConvexRegion2D):
+    """[Circle shape]"""
+
+    def __init__(self, center, radius):
+        self.center = np.array(center)
+        self.radius = radius
+
+    def get_convex_rep(self):
+        num_sides = 8
+        theta = np.linspace(0, 2*np.pi, num_sides, endpoint=False)
+        mat_A = np.vstack((np.cos(theta), np.sin(theta))).T
+        vec_b = np.ones(num_sides) * self.radius + np.dot(mat_A, self.center)
+
+        return mat_A, vec_b
+
+    def get_plot_patch(self):
+        return patches.Circle(
+            self.center,
+            self.radius,
+            linewidth=1,
+            edgecolor="k",
+            facecolor="r",
+        )
+
+    # Define a method specifically for circle collision check
+    def check_collision_with_point(self, point, margin):
+        # Check if the distance from the point to the center of the circle is less than the radius plus margin
+        return np.linalg.norm(point - self.center) <= self.radius + margin
+
+
 def get_dist_point_to_region(point, mat_A, vec_b):
     """Return distance between a point and a convex region"""
     opti = ca.Opti()

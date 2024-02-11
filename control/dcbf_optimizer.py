@@ -179,19 +179,46 @@ class NmpcDbcfOptimizer:
             self.opti.set_initial(mu[:, i], mu_curr)
             self.opti.set_initial(omega[i], 0.1)
 
+
+    def add_circle_obstacle_constraints(self, param, circle, safe_dist):
+        for i in range(param.horizon):
+            # Calculate the squared distance from the robot's position to the circle's center
+            squared_distance = (self.variables["x"][0, i] - circle.center[0])**2 + (self.variables["x"][1, i] - circle.center[1])**2
+            # Constraint to maintain a safe distance from the circle's perimeter
+            self.opti.subject_to(squared_distance >= (circle.radius + safe_dist)**2)
+
+
+    # def add_obstacle_avoidance_constraint(self, param, system, obstacles_geo):
+    #     self.costs["decay_rate_relaxing"] = 0
+    #     # TODO: wrap params
+    #     # TODO: move safe dist inside attribute `system`
+    #     safe_dist = system._dynamics.safe_dist(system._state._x, 0.1, -1.0, 1.0, param.margin_dist)
+    #     robot_components = system._geometry.equiv_rep()
+    #     for obs_geo in obstacles_geo:
+    #         for robot_comp in robot_components:
+    #             # TODO: need to add case for `add_point_convex_constraint()`
+    #             if isinstance(robot_comp, ConvexRegion2D):
+    #                 self.add_convex_to_convex_constraint(param, robot_comp, obs_geo, safe_dist)
+    #             else:
+    #                 raise NotImplementedError()
+
     def add_obstacle_avoidance_constraint(self, param, system, obstacles_geo):
         self.costs["decay_rate_relaxing"] = 0
-        # TODO: wrap params
-        # TODO: move safe dist inside attribute `system`
+        # Get safe distance calculation from the system dynamics
         safe_dist = system._dynamics.safe_dist(system._state._x, 0.1, -1.0, 1.0, param.margin_dist)
         robot_components = system._geometry.equiv_rep()
+
         for obs_geo in obstacles_geo:
-            for robot_comp in robot_components:
-                # TODO: need to add case for `add_point_convex_constraint()`
-                if isinstance(robot_comp, ConvexRegion2D):
+            if isinstance(obs_geo, CircleRegion):
+                # Add circular obstacle constraints
+                for robot_comp in robot_components:
+                    self.add_circle_obstacle_constraints(param, obs_geo, safe_dist)
+            elif isinstance(obs_geo, ConvexRegion2D):
+                # Add convex obstacle constraints
+                for robot_comp in robot_components:
                     self.add_convex_to_convex_constraint(param, robot_comp, obs_geo, safe_dist)
-                else:
-                    raise NotImplementedError()
+            else:
+                raise NotImplementedError("Obstacle type not supported for avoidance constraints")
 
     def add_warm_start(self, param, system):
         # TODO: wrap params

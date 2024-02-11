@@ -286,24 +286,39 @@ def create_env(env_type):
         bounds = ((0.0 * s, 0.0 * s), (13.0 * s, 6.0 * s))
         cell_size = 0.25 * s
         grid = (bounds, cell_size)
+
         obstacles = []
-        obstacles.append(RectangleRegion(0.0 * s, 3.0 * s, 0.0 * s, 3.0 * s))
-        obstacles.append(RectangleRegion(1.0 * s, 2.0 * s, 4.0 * s, 6.0 * s))
-        obstacles.append(RectangleRegion(2.0 * s, 6.0 * s, 5.0 * s, 6.0 * s))
-        obstacles.append(RectangleRegion(6.0 * s, 7.0 * s, 4.0 * s, 6.0 * s))
-        obstacles.append(RectangleRegion(4.0 * s, 5.0 * s, 0.0 * s, 4.0 * s))
-        obstacles.append(RectangleRegion(5.0 * s, 7.0 * s, 2.0 * s, 3.0 * s))
-        obstacles.append(RectangleRegion(6.0 * s, 9.0 * s, 1.0 * s, 2.0 * s))
-        obstacles.append(RectangleRegion(8.0 * s, 9.0 * s, 2.0 * s, 4.0 * s))
-        obstacles.append(RectangleRegion(9.0 * s, 12.0 * s, 3.0 * s, 4.0 * s))
-        obstacles.append(RectangleRegion(11.0 * s, 12.0 * s, 4.0 * s, 5.0 * s))
-        obstacles.append(RectangleRegion(8.0 * s, 10.0 * s, 5.0 * s, 6.0 * s))
-        obstacles.append(RectangleRegion(10.0 * s, 11.0 * s, 0.0 * s, 2.0 * s))
-        obstacles.append(RectangleRegion(12.0 * s, 13.0 * s, 1.0 * s, 2.0 * s))
-        obstacles.append(RectangleRegion(0.0 * s, 13.0 * s, 6.0 * s, 7.0 * s))
-        obstacles.append(RectangleRegion(-1.0 * s, 0.0 * s, -1.0 * s, 7.0 * s))
-        obstacles.append(RectangleRegion(0.0 * s, 13.0 * s, -1.0 * s, 0.0 * s))
-        obstacles.append(RectangleRegion(13.0 * s, 14.0 * s, -1.0 * s, 7.0 * s))
+        # obstacles.append(RectangleRegion(0.0 * s, 3.0 * s, 0.0 * s, 3.0 * s))
+        # obstacles.append(RectangleRegion(1.0 * s, 2.0 * s, 4.0 * s, 6.0 * s))
+        # obstacles.append(RectangleRegion(2.0 * s, 6.0 * s, 5.0 * s, 6.0 * s))
+        # obstacles.append(RectangleRegion(6.0 * s, 7.0 * s, 4.0 * s, 6.0 * s))
+        # obstacles.append(RectangleRegion(4.0 * s, 5.0 * s, 0.0 * s, 4.0 * s))
+        # obstacles.append(RectangleRegion(5.0 * s, 7.0 * s, 2.0 * s, 3.0 * s))
+        # obstacles.append(RectangleRegion(6.0 * s, 9.0 * s, 1.0 * s, 2.0 * s))
+        # obstacles.append(RectangleRegion(8.0 * s, 9.0 * s, 2.0 * s, 4.0 * s))
+        # obstacles.append(RectangleRegion(9.0 * s, 12.0 * s, 3.0 * s, 4.0 * s))
+        # obstacles.append(RectangleRegion(11.0 * s, 12.0 * s, 4.0 * s, 5.0 * s))
+        # obstacles.append(RectangleRegion(8.0 * s, 10.0 * s, 5.0 * s, 6.0 * s))
+        # obstacles.append(RectangleRegion(10.0 * s, 11.0 * s, 0.0 * s, 2.0 * s))
+        # obstacles.append(RectangleRegion(12.0 * s, 13.0 * s, 1.0 * s, 2.0 * s))
+        # obstacles.append(RectangleRegion(0.0 * s, 13.0 * s, 6.0 * s, 7.0 * s))
+        # obstacles.append(RectangleRegion(-1.0 * s, 0.0 * s, -1.0 * s, 7.0 * s))
+        # obstacles.append(RectangleRegion(0.0 * s, 13.0 * s, -1.0 * s, 0.0 * s))
+        # obstacles.append(RectangleRegion(13.0 * s, 14.0 * s, -1.0 * s, 7.0 * s))
+        
+        # obstacles.append(CircleRegion(center=(1.5 * s, 1.5 * s), radius=1.5 * s))  
+        # obstacles.append(CircleRegion(center=(1.5 * s, 5.0 * s), radius=1.0 * s)) 
+        # obstacles.append(CircleRegion(center=(4.0 * s, 5.5 * s), radius=2.0 * s))  
+        # obstacles.append(CircleRegion(center=(6.5 * s, 5.0 * s), radius=0.5 * s)) 
+        obstacles.append(CircleRegion(center=(4.5 * s, 2.0 * s), radius=0.5 * s))  
+        # obstacles.append(CircleRegion(center=(6.0 * s, 2.5 * s), radius=0.5 * s))  
+        # obstacles.append(CircleRegion(center=(7.5 * s, 1.5 * s), radius=1.0 * s))  
+        # obstacles.append(CircleRegion(center=(8.5 * s, 3.0 * s), radius=0.5 * s))  
+        # obstacles.append(CircleRegion(center=(10.5 * s, 3.5 * s), radius=1.5 * s)) 
+        obstacles.append(CircleRegion(center=(11.5 * s, 4.5 * s), radius=0.5 * s)) 
+        # obstacles.append(CircleRegion(center=(9.0 * s, 5.5 * s), radius=1.0 * s))  
+        # obstacles.append(CircleRegion(center=(10.5 * s, 1.0 * s), radius=0.5 * s)) 
+        # obstacles.append(CircleRegion(center=(12.5 * s, 1.5 * s), radius=0.5 * s))
         return start, goal, grid, obstacles
     elif env_type == "oblique_maze":
         s = 0.15  # scale of environemtn
@@ -340,13 +355,37 @@ def create_env(env_type):
             )
         )
         return start, goal, grid, obstacles
+    elif env_type == "circle_maze":
+        s = 0.15  # scale of environment
+        start = np.array([0.5 * s, 5.5 * s, -math.pi / 2.0])
+        goal = np.array([12.5 * s, 0.5 * s])
+        bounds = ((0.0 * s, 0.0 * s), (13.0 * s, 6.0 * s))
+        cell_size = 0.25 * s
+        grid = (bounds, cell_size)
 
+        obstacles = []
+        obstacles.append(CircleRegion(center=(1.5 * s, 1.5 * s), radius=1.5 * s))  
+        obstacles.append(CircleRegion(center=(1.5 * s, 5.0 * s), radius=1.0 * s)) 
+        obstacles.append(CircleRegion(center=(4.0 * s, 5.5 * s), radius=2.0 * s))  
+        obstacles.append(CircleRegion(center=(6.5 * s, 5.0 * s), radius=0.5 * s)) 
+        obstacles.append(CircleRegion(center=(4.5 * s, 2.0 * s), radius=0.5 * s))  
+        obstacles.append(CircleRegion(center=(6.0 * s, 2.5 * s), radius=0.5 * s))  
+        obstacles.append(CircleRegion(center=(7.5 * s, 1.5 * s), radius=1.0 * s))  
+        obstacles.append(CircleRegion(center=(8.5 * s, 3.0 * s), radius=0.5 * s))  
+        obstacles.append(CircleRegion(center=(10.5 * s, 3.5 * s), radius=1.5 * s)) 
+        obstacles.append(CircleRegion(center=(11.5 * s, 4.5 * s), radius=0.5 * s)) 
+        obstacles.append(CircleRegion(center=(9.0 * s, 5.5 * s), radius=1.0 * s))  
+        obstacles.append(CircleRegion(center=(10.5 * s, 1.0 * s), radius=0.5 * s)) 
+        obstacles.append(CircleRegion(center=(12.5 * s, 1.5 * s), radius=0.5 * s))
+        return start, goal, grid, obstacles
 
 if __name__ == "__main__":
     # kinematic_car_triangle_simulation_test()
     # kinematic_car_pentagon_simulation_test()
-    maze_types = ["maze", "oblique_maze"]
-    robot_shapes = ["triangle", "rectangle", "pentagon", "lshape"]
-    for maze_type in maze_types:
-        for robot_shape in robot_shapes:
-            kinematic_car_all_shapes_simulation_test(maze_type, robot_shape)
+    # maze_types = ["maze", "oblique_maze"]
+    # robot_shapes = ["triangle", "rectangle", "pentagon", "lshape"]
+    # for maze_type in maze_types:
+    #     for robot_shape in robot_shapes:
+    #         kinematic_car_all_shapes_simulation_test(maze_type, robot_shape)
+    kinematic_car_all_shapes_simulation_test("maze", "triangle")
+
