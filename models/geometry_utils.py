@@ -90,7 +90,7 @@ class CircleRegion(ConvexRegion2D):
 
     # Define a method specifically for circle collision check
     def check_collision_with_point(self, point, margin):
-        # Check if the distance from the point to the center of the circle is less than the radius plus margin
+        # Check the distance from the point to the center of the circle + margin
         return np.linalg.norm(point - self.center) <= self.radius + margin
 
 
@@ -100,7 +100,7 @@ def get_dist_point_to_region(point, mat_A, vec_b):
     # variables and cost
     point_in_region = opti.variable(mat_A.shape[-1], 1)
     cost = 0
-    # constraints
+    # constraintsv
     constraint = ca.mtimes(mat_A, point_in_region) <= vec_b
     opti.subject_to(constraint)
     dist_vec = point - point_in_region
